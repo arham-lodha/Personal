@@ -1,0 +1,207 @@
+---
+title: Hello World & System Demo
+date: 2023-10-27
+tags: [meta, latex, demo]
+subject: general
+excerpt: A demonstration of the features of this blog engine, including LaTeX diagrams, sidenotes, and interactive content.
+interactive: true
+---
+
+# Introduction
+
+Welcome to my new blog. This post demonstrates the **Tufted** design and the LaTeX rendering capabilities. This layout is designed to be readable and elegant, prioritizing content while supporting complex mathematical notation.
+
+## Preambles
+
+The blog supports subject-specific preambles. When creating a post, you define a `subject` in the frontmatter. The system then loads the corresponding `.tex` file from `content/preambles/`.
+
+For example, this post uses `subject: general`, which loads `general.tex`:
+
+```latex
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\newcommand{\R}{\mathbb{R}}
+...
+```
+
+This allows us to maintain consistent notation packages across different topics (e.g., `algebra.tex`, `topology.tex`).
+
+## Mathematics
+
+We support standard LaTeX math rendering via KaTeX. This is processed at build time for speed and accessibility.
+
+**Inline Math**
+
+You can write inline math using single dollar signs: `$e^{i\pi} + 1 = 0$`.
+
+Renders as: $e^{i\pi} + 1 = 0$.
+
+**Display Math**
+
+Display math uses double dollar signs:
+
+```latex
+$$
+\int_{-\infty}^\infty e^{-x^2} dx = \sqrt{\pi}
+$$
+```
+
+Renders as:
+
+$$
+\int_{-\infty}^\infty e^{-x^2} dx = \sqrt{\pi}
+$$
+
+## Server-Side LaTeX Diagrams
+
+For complex diagrams that KaTeX cannot handle, such as TikZ figures/commutative diagrams, we use a custom server-side compilation pipeline. The component `<Latex />` takes the raw LaTeX code, wraps it with the document preamble, and compiles it using `pdflatex` to PDF, then converts it to SVG using `dvisvgm`.
+
+**Commutative Diagrams**
+
+We can render complex `tikz-cd` diagrams:
+
+```tsx
+<Latex caption="A commutative diagram" code={`
+\begin{tikzcd}
+A \arrow[r, "\phi"] \arrow[d, "f"] & B \arrow[d, "g"] \\
+C \arrow[r, "\psi"] & D
+\end{tikzcd}
+`} />
+```
+
+<Latex caption="A commutative diagram rendered via pdflatex + dvisvgm" code={`
+\\begin{tikzcd}
+A \\arrow[r, "\\phi"] \\arrow[d, "f"] & B \\arrow[d, "g"] \\\\
+C \\arrow[r, "\\psi"] & D
+\\end{tikzcd}
+`} />
+
+**TikZ Figures**
+
+We also support standard TikZ drawing commands:
+
+```tsx
+<Latex caption="Simple geometry" code={`
+\\begin{tikzpicture}
+\\draw[fill=yellow!20] (0,0) circle (1cm);
+\\draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+\\draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+\\draw[red, thick] (0,0) -- (45:1cm);
+\\end{tikzpicture}
+`} />
+```
+
+<Latex caption="Simple geometry" code={`
+\\begin{tikzpicture}
+\\draw[fill=yellow!20] (0,0) circle (1cm);
+\\draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+\\draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+\\draw[red, thick] (0,0) -- (45:1cm);
+\\end{tikzpicture}
+`} />
+
+## Marginalia and Sidenotes
+
+This layout features sidenotes<Sidenote>This is a sidenote. It sits in the margin on large screens and collapses inline or below on smaller screens.</Sidenote> inspired by Edward Tufte's design philosophy.
+
+Usage:
+```tsx
+This layout features sidenotes<Sidenote>This is a sidenote...</Sidenote> inspired by...
+```
+
+## Interactive Content
+
+We can embed interactive React components directly into the MDX. If the post metadata includes `interactive: true`, the system dynamically loads the requested component.
+
+```tsx
+<Interactive id="hello-world-demo" />
+```
+
+<Interactive id="hello-world-demo" />
+
+## Syntax Highlighting
+
+Code blocks are supported with syntax highlighting (via `rehype-pretty-code` with `solarized-light` theme):
+
+```python
+def hello():
+    print("Hello World")
+```
+
+## Post Frontmatter
+
+The blog uses YAML frontmatter to define post metadata. Here is the syntax:
+
+```yaml
+---
+title: Post Title
+date: YYYY-MM-DD
+tags: [tag1, tag2]
+subject: general  # Matches a filename in content/preambles/ (e.g., general.tex)
+excerpt: A brief summary for the index page.
+interactive: true # Set to true if you are embedding <Interactive /> components
+---
+```
+
+- **subject**: Defines which LaTeX preamble is loaded. Ensure `{subject}.tex` exists in `content/preambles/`.
+- **interactive**: Must be `true` to enable dynamic loading of interactive components.
+
+## Images
+
+You can add images to your blog posts using standard Markdown syntax. 
+
+**Local Images**
+
+Place your images in the `public/` directory (e.g., `public/images/diagram-photo.jpg`). You can then reference them directly via their absolute path from the root:
+
+```markdown
+![Description of image](/images/diagram-photo.jpg)
+```
+
+**Remote Images**
+
+You can also use external URLs:
+
+```markdown
+![External Image](https://example.com/image.png)
+```
+
+For more control over layout (like setting a specific width), you can use standard HTML `<img>` tags directly in the MDX:
+
+```html
+<img src="/images/diagram-photo.jpg" alt="Description" style={{ width: '100%', border: '2px solid black' }} />
+```
+
+## File Structure
+
+The blog project is organized as follows:
+
+- **`content/`**: Stores your writing and LaTeX settings.
+  - **`blog/`**: Your MDX blog posts go here.
+  - **`preambles/`**: LaTeX `.tex` files for different subjects (loaded via frontmatter).
+- **`public/`**: Static assets like your CV PDF, images, and favicons. Anything here is served at the root `/`.
+- **`src/`**: The application source code.
+  - **`app/`**: Next.js App Router pages and layouts.
+  - **`components/`**: React components used in MDX (Latex, Sidenote, etc.).
+  - **`lib/`**: Utility functions for parsing MDX and compiling LaTeX.
+
+## Development
+
+To build and run the application locally:
+
+**Development Server**
+```bash
+npm run dev
+# Runs on http://localhost:3000
+```
+
+**Production Build**
+```bash
+npm run build
+npm start
+```
+
+## Conclusion
+
+This system allows for a rich mixing of prose, mathematics, code, and interactivity, tailored for technical writing.

@@ -1,26 +1,282 @@
 @import "tailwindcss";
 
+@import 'katex/dist/katex.min.css';
+
+@theme {
+    --color-sepia-light: #fffaf5;
+    --color-sepia-default: #f4ecd8;
+    --color-sepia-dark: #e4dcc8;
+    --color-ochre: #8c4b2d;
+
+    --font-mono: "Space Mono", monospace;
+
+    --border-width-3: 3px;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    --foreground: #1e1e1e;
+    --background: #fffaf5;
+    --link-color: #8c4b2d;
+    --accent-color: #8c4b2d;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    color: var(--foreground);
+    background: var(--background);
+    font-family: var(--font-mono);
+    line-height: 1.6;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.layout-wrapper {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 2rem 4rem;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Arham Style Specifics */
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+h1::before {
+    content: "# ";
+    color: #999;
+}
+
+h2::before {
+    content: "## ";
+    color: #999;
+}
+
+h3::before {
+    content: "### ";
+    color: #999;
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin-top: 0;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 1.4rem;
+}
+
+h3 {
+    font-size: 1.1rem;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+}
+
+a:hover {
+    text-decoration-style: dotted;
+    text-decoration-thickness: 2px;
+}
+
+/* Sidenotes */
+.sidenote {
+    float: right;
+    clear: right;
+    margin-right: -40%;
+    width: 35%;
+    margin-top: 0.3rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: #555;
+    border-left: 2px solid var(--accent-color);
+    padding-left: 0.75rem;
+    box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+    .sidenote {
+        float: none;
+        display: block;
+        margin: 1rem 0;
+        width: 100%;
+        background: #f9f4ef;
+        padding: 1rem;
+        margin-right: 0;
+    }
+}
+
+/* Arham Components */
+.btn-arham {
+    @apply inline-block px-4 py-2 bg-black text-white uppercase font-bold text-sm border-2 border-black no-underline hover:bg-zinc-800 transition-colors cursor-pointer;
+}
+
+.tag-arham {
+    @apply px-3 py-1 border border-black text-xs uppercase bg-white text-black cursor-pointer transition-colors;
+}
+
+.tag-arham.active {
+    @apply bg-black text-white;
+}
+
+/* Markdown prose adjustment */
+.mdx-content>p,
+.mdx-content>ul,
+.mdx-content>ol,
+.mdx-content>blockquote,
+.mdx-content>pre,
+.mdx-content>div {
+    width: 70%;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 900px) {
+
+    .mdx-content>p,
+    .mdx-content>ul,
+    .mdx-content>ol,
+    .mdx-content>blockquote,
+    .mdx-content>div,
+    [data-rehype-pretty-code-figure] pre,
+    pre.shiki {
+        width: 100%;
+    }
+}
+
+/* Shiki / Rehype Pretty Code Overrides */
+[data-rehype-pretty-code-figure] pre,
+pre.shiki {
+    @apply !bg-[#f7f2ed] !border-none !p-6 !my-8 !overflow-x-auto !text-[0.9rem];
+    width: 70%;
+    /* Computed Reference Styles */
+    background-color: white !important;
+    padding: 24px !important;
+    border-left: 6px solid rgb(139, 69, 19) !important;
+    /* SaddleBrown */
+    border-top: 2px solid rgb(43, 43, 43) !important;
+    border-right: 2px solid rgb(43, 43, 43) !important;
+    border-bottom: 2px solid rgb(43, 43, 43) !important;
+    border-radius: 0px !important;
+    margin-bottom: 24px !important;
+    box-sizing: border-box !important;
+}
+
+[data-rehype-pretty-code-figure] code {
+    @apply !bg-transparent !p-0;
+}
+
+/* Table of Contents Container */
+.toc-box {
+    @apply border-2 border-dashed border-[#999] p-6 my-8 relative bg-[#fffaf5];
+}
+
+.toc-label {
+    @apply absolute -top-3 left-4 bg-[#fffaf5] px-1 text-[0.75rem] font-bold tracking-[0.1em];
+}
+
+/* Lists in content */
+.mdx-content ul {
+    list-style-type: disc !important;
+    padding-left: 1.5rem !important;
+    margin-bottom: 1.5rem;
+}
+
+.mdx-content ol {
+    list-style-type: decimal !important;
+    padding-left: 1.5rem !important;
+    margin-bottom: 1.5rem;
+}
+
+.mdx-content li {
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.mdx-content li::marker {
+    color: var(--accent-color);
+}
+
+/* Search & Tags - Reference Aesthetic */
+input#search-input {
+    @apply w-full p-3 border-2 border-black rounded-none transition-colors mb-6 font-mono text-base;
+    background-color: rgba(255, 255, 255, 0.5);
+    /* 2px solid border, no radius, 16px font */
+}
+
+input#search-input:focus {
+    @apply outline-none bg-[#f4ecd8];
+}
+
+.tag-filter-btn {
+    @apply border-2 border-black bg-transparent text-black uppercase font-bold text-sm px-4 py-2 cursor-pointer transition-all font-mono;
+}
+
+.tag-filter-btn.active {
+    @apply bg-black text-[#f5f5dc];
+    box-shadow: 2px 2px 0px 0px #8c4b2d;
+    /* Hard shadow accent */
+}
+
+/* Blog Index Item Styling */
+.blog-post-item {
+    @apply block no-underline mb-8 hover:decoration-0;
+}
+
+.blog-post-header {
+    @apply flex items-baseline gap-2 mb-2 font-bold;
+}
+
+.blog-post-marker {
+    @apply text-[var(--accent-color)] font-mono;
+}
+
+.blog-post-title {
+    @apply text-xl uppercase tracking-wide text-black hover:underline decoration-1 underline-offset-4 decoration-black;
+}
+
+.blog-post-date {
+    @apply text-sm text-gray-500 font-mono font-normal ml-2;
+}
+
+.blog-post-excerpt {
+    @apply text-base text-gray-800 font-mono mb-2 leading-relaxed;
+}
+
+/* Preview Tags in Index */
+.preview-tag-list {
+    @apply flex flex-wrap gap-2;
+}
+
+.preview-tag {
+    @apply border border-black px-2 py-[2px] text-[0.75rem] bg-transparent text-black lowercase font-mono;
+}
+
+/* Updated Page Header */
+.page-header-writing {
+    @apply text-[2.2rem] font-bold uppercase tracking-[0.05em] mb-4;
+}
+
+.page-header-writing::before {
+    content: "# ";
+    color: #999;
+}
+
+/* Inline LaTeX SVG styling */
+.latex-svg-container svg {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    display: block;
 }

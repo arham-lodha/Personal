@@ -1,27 +1,43 @@
 {
-  "name": "temp-blog",
-  "version": "0.1.0",
-  "private": true,
+  "name": "blog-project",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "dependencies": {
-    "next": "16.1.0",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "clsx": "^2.1.1",
+    "fuse.js": "^7.1.0",
+    "gray-matter": "^4.0.3",
+    "next": "^16.1.0",
+    "next-mdx-remote": "^5.0.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-katex": "^7.0.1",
+    "rehype-pretty-code": "^0.14.1",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
+    "shiki": "^3.20.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "babel-plugin-react-compiler": "1.0.0",
-    "eslint": "^9",
-    "eslint-config-next": "16.1.0",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/node": "^25.0.3",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.4.23",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "^16.1.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3"
   }
 }
