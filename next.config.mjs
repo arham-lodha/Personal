@@ -7,7 +7,7 @@ const nextConfig = {
         unoptimized: true, // Required for static export
     },
     trailingSlash: true,
-    basePath: '/personal',
+    basePath: '/Personal',
 };
 
 export default nextConfig;

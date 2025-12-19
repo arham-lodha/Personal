@@ -153,10 +153,12 @@ You can add images to your blog posts using standard Markdown syntax.
 
 **Local Images**
 
-Place your images in the `public/` directory (e.g., `public/images/diagram-photo.jpg`). You can then reference them directly via their absolute path from the root:
+Place your images in the `public/` directory (e.g., `public/images/diagram-photo.jpg`). You can then reference them directly.
+
+> **Note**: Since we are deploying to a subpath `/Personal`, you must prefix local assets with `/Personal`.
 
 ```markdown
-![Description of image](/images/diagram-photo.jpg)
+![Description of image](/Personal/images/diagram-photo.jpg)
 ```
 
 **Remote Images**
@@ -170,7 +172,7 @@ You can also use external URLs:
 For more control over layout (like setting a specific width), you can use standard HTML `<img>` tags directly in the MDX:
 
 ```html
-<img src="/images/diagram-photo.jpg" alt="Description" style={{ width: '100%', border: '2px solid black' }} />
+<img src="/Personal/images/diagram-photo.jpg" alt="Description" style={{ width: '100%', border: '2px solid black' }} />
 ```
 
 ## File Structure
