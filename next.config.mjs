@@ -7,9 +7,7 @@ const nextConfig = {
         unoptimized: true, // Required for static export
     },
     trailingSlash: true,
-    // If you are deploying to https://arham-lodha.github.io/Blog/, 
-    // uncomment the line below:
-    // basePath: '/Blog',
+    basePath: '/personal',
 };
 
 export default nextConfig;

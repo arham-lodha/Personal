@@ -29,7 +29,7 @@ export default function Home() {
 
                         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
                             <div className="flex items-center gap-4">
-                                <a href="/CV.pdf" className="btn-arham">
+                                <a href="/personal/CV.pdf" className="btn-arham">
                                     Download CV
                                 </a>
                                 <span className="text-sm text-gray-500 uppercase tracking-wide">
@@ -54,7 +54,7 @@ export default function Home() {
 
                     <div className="w-full md:w-2/5 flex flex-col gap-4">
                         <img
-                            src="/images/profile.jpeg"
+                            src="/personal/images/profile.jpeg"
                             alt="Profile"
                             className="w-full h-auto border-2 border-black shadow-[8px_8px_0px_0px_#8c4b2d] bg-white transition-transform hover:-translate-y-1"
                         />
