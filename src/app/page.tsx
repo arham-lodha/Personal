@@ -56,7 +56,7 @@ export default function Home() {
                         <img
                             src="/Personal/images/profile.jpeg"
                             alt="Profile"
-                            className="w-full h-auto border-2 border-black shadow-[8px_8px_0px_0px_#8c4b2d] bg-white transition-transform hover:-translate-y-1"
+                            className="w-full h-auto border-2 border-black shadow-[8px_8px_0px_0px_#8c4b2d]  hover:-translate-y-1"
                         />
                         <div className="text-right">
                             <p className="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold">Arham Lodha</p>
