@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[13041,["/_next/static/chunks/d0740d88ced4471b.js","/_next/static/chunks/366eddfb0b1f3503.js"],"Search"]
+3:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/7340adf74ff47ec0.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"buildId":"4WJV5BUxbu5mUxNPhgwYe","rsc":["$","$1","c",{"children":[["$","main",null,{"className":"layout-wrapper","children":[["$","div",null,{"className":"mb-8","children":[["$","h1",null,{"className":"page-header-writing","children":"Writing"}],["$","p",null,{"className":"text-lg","children":"A collection of notes, articles, and explorations."}]]}],["$","$L2",null,{"posts":[{"slug":"hello-world","title":"Hello World & System Demo","date":"2023-10-27T00:00:00.000Z","tags":["meta","latex","demo"],"excerpt":"A demonstration of the features of this blog engine, including LaTeX diagrams, sidenotes, and interactive content."}]}]]}],[["$","script","script-0",{"src":"/_next/static/chunks/366eddfb0b1f3503.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
+5:null
